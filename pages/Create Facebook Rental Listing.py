@@ -115,7 +115,7 @@ if not st.session_state.submitted:
                         🏠 {listing_json.get('bedrooms', 'N/A')} bed, {listing_json.get('bathrooms', 'N/A')} bath
                         💰 {listing_json.get('rent', 'N/A')}/month
                         
-                        📋 Lease Terms: {listing_json.get('lease_terms', 'N/A')}
+
                         
                         ✨ Amenities:
                         {', '.join(listing_json.get('amenities', ['None listed']))}
@@ -123,8 +123,7 @@ if not st.session_state.submitted:
                         📝 Description:
                         {listing_json.get('description', 'No description available')}
                         
-                        📞 Contact:
-                        {listing_json.get('contact', 'No contact information provided')}
+
                         """
                         
                         # Store the initial message in session state

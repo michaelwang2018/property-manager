@@ -34,7 +34,8 @@ You must return your response in the following JSON format:
     "video": []
 }
 
-Base all details on the provided images and property information. Be specific and accurate in your descriptions.
+Base all details on the provided images and property information. Be specific and accurate in your descriptions. Assume approximately 500 sq ft for each bedroom and 100 sq ft for each bathroom.
+If the property is in San Francisco, assume $2000/month minimum for reach bedroom, and if there's extra amenities like laundry, modern designs, etc then bump it up more.
 """
 new_prompt= """
 Analyze the provided images of the property and generate a compelling rental ad that highlights its unique features and appeals to potential renters.
