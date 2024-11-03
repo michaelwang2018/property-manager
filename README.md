@@ -1,5 +1,9 @@
 # GPT Facebook Marketplace Rental Listing Creator
+To get started, run the following command:
 
+```
+streamlit run Home.py
+```
 
 ## Description
 
