@@ -105,8 +105,8 @@ def create_marketplace_listing(page, property_details):
     page.wait_for_selector('div[aria-label="Publish"]')
     print('Publishing listing...')
     # TODO: Uncomment to actually publish
-    # page.click('div[aria-label="Publish"]')
-    # page.wait_for_timeout(random.randint(1000, 3000))
+    page.click('div[aria-label="Publish"]')
+    page.wait_for_timeout(random.randint(1000, 3000))
 
 if __name__ == "__main__":
     # Example usage
