@@ -74,13 +74,13 @@ if not st.session_state.submitted:
                         # "security_deposit": 2400
                     },
                     "features": {
-                        "pets_allowed": "string",
-                        "laundry_type": "string",
-                        "air_conditioning": "string",
-                        "heating": "string",
-                        "parking_type": "string",
-                        "shared_property": "string",
-                        "bathroom_type": "string"
+                        # "pets_allowed": "string",
+                        # "laundry_type": "string",
+                        # "air_conditioning": "string",
+                        # "heating": "string",
+                        # "parking_type": "string",
+                        # "shared_property": "string",
+                        # "bathroom_type": "string"
                     },
                     "visuals_and_description": {
                         "uploaded_files": [
@@ -201,20 +201,20 @@ else:
                     payload = {
                         "core_details": {
                             "address": st.session_state.address,
-                            "square_feet": 0,  # These could be added to session state if known
-                            "bedrooms": 0,
-                            "bathrooms": 0,
-                            "monthly_rent": 1200,  # Could be from session state
-                            "security_deposit": 2400
+                            # "square_feet": 0,  # These could be added to session state if known
+                            # "bedrooms": 0,
+                            # "bathrooms": 0,
+                            # "monthly_rent": 1200,  # Could be from session state
+                            # "security_deposit": 2400
                         },
                         "features": {
-                            "pets_allowed": "string",
-                            "laundry_type": "string",
-                            "air_conditioning": "string",
-                            "heating": "string",
-                            "parking_type": "string",
-                            "shared_property": "string",
-                            "bathroom_type": "string"
+                            # "pets_allowed": "string",
+                            # "laundry_type": "string",
+                            # "air_conditioning": "string",
+                            # "heating": "string",
+                            # "parking_type": "string",
+                            # "shared_property": "string",
+                            # "bathroom_type": "string"
                         },
                         "visuals_and_description": {
                             "uploaded_files": [

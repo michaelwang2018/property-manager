@@ -1,9 +1,17 @@
 # GPT Facebook Marketplace Rental Listing Creator
-To get started, run the following command:
+To get the streamlit appstarted, run the following command:
 
 ```
 streamlit run Home.py
 ```
+
+To get the API running, run the following command:
+```
+uvicorn gen_listing:app --host 0.0.0.0 --port 8000 --reload
+```
+
+Make sure to set up https://cloud.google.com/docs/authentication/provide-credentials-adc#how-to
+
 
 ## Description
 
