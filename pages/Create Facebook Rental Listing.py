@@ -185,7 +185,7 @@ else:
 
     # Only show chat input if not listed
     if not st.session_state.listed:
-        if prompt := st.chat_input("What would you like help with?"):
+        if prompt := st.chat_input("What would you like me to change about the listing?"):
             st.session_state.messages.append({"role": "user", "content": prompt})
             
             with st.chat_message("user"):
@@ -196,7 +196,7 @@ else:
                     # Prepare the API request
                     api_url = "http://10.20.5.117:8000/query"
                     
-                    # Prepare the structured payload
+                    # Prepare the structured payload with user feedback
                     payload = {
                         "core_details": {
                             "address": st.session_state.address,
@@ -230,43 +230,50 @@ else:
                             "description": "string"
                         },
                         "additional_info": {
-                            "message": prompt  # Including the user's message
+                            "message": f"Please update the listing with the following feedback: {prompt}"
                         }
                     }
                     
                     try:
                         response = requests.post(api_url, json=payload)
-                        response_data = json.loads(response.text)
+                        raw_response = json.loads(response.text)
                         
-                        # Format the response for display
-                        listing_details = f"""
-                        📍 {response_data['core_details']['address']}
+                        # Parse the nested JSON string
+                        listing_json = json.loads(raw_response['response'].lstrip(','))
                         
-                        🏠 {response_data['core_details']['bedrooms']} bed, {response_data['core_details']['bathrooms']} bath
-                        📐 {response_data['core_details']['square_feet']} sq ft
-                        💰 ${response_data['core_details']['monthly_rent']}/month
+                        # Format the updated listing
+                        updated_listing = f"""
+                        I've updated the listing based on your feedback. Here's the new version:
+
+                        📍 {listing_json.get('address', 'N/A')}
                         
-                        🐾 Pets Allowed: {response_data['features']['pets_allowed']}
-                        🧺 Laundry: {response_data['features']['laundry_type']}
-                        ❄️ AC: {response_data['features']['air_conditioning']}
-                        🚗 Parking: {response_data['features']['parking_type']}
-                        🌡️ Heating: {response_data['features']['heating']}
+                        🏠 {listing_json.get('bedrooms', 'N/A')} bed, {listing_json.get('bathrooms', 'N/A')} bath
+                        💰 {listing_json.get('rent', 'N/A')}/month
+                        
+                        ✨ Amenities:
+                        {', '.join(listing_json.get('amenities', ['None listed']))}
+                        
+
                         
                         📝 Description:
-                        {response_data['visuals_and_description']['description']}
+                        {listing_json.get('description', 'No description available')}
                         
-                        💬 {response_data['additional_info']['message']}
+
+                        
+                        Is this more what you were looking for?
                         """
                         
-                        st.markdown(listing_details)
+                        # Add the message to session state and rerun to show buttons
                         st.session_state.messages.append({
                             "role": "assistant", 
-                            "content": listing_details
+                            "content": updated_listing
                         })
+                        st.rerun()  # This ensures the new message is displayed with buttons
                         
                     except Exception as e:
-                        error_message = f"Error generating listing: {str(e)}"
+                        error_message = f"Error updating listing: {str(e)}"
                         st.error(error_message)
+                        st.write("Raw response:", response.text)
                         st.session_state.messages.append({
                             "role": "assistant", 
                             "content": error_message

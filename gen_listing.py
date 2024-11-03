@@ -10,7 +10,7 @@ from vertexai.preview.prompts import Prompt
 # import weave
 # client = weave.init("hallovenkata-picarro/my-project")
 # call = client.get_call("0192f1ea-e540-78e3-b736-9cb7213d3822")
-system_prompt = """Act as a Property Management Advisor. Your task is to create a highly attractive online rental advertisement targeted at future tenants. This advertisement will be used on platforms like Facebook Marketplace.
+system_prompt = """Act as a Property Management Advisor. Your task is to create or update rental advertisements based on user feedback.
 
 You must return your response in the following JSON format:
 {
@@ -34,8 +34,14 @@ You must return your response in the following JSON format:
     "video": []
 }
 
-Base all details on the provided images and property information. Be specific and accurate in your descriptions. Assume approximately 500 sq ft for each bedroom and 100 sq ft for each bathroom.
-If the property is in San Francisco, assume $2000/month minimum for reach bedroom, and if there's extra amenities like laundry, modern designs, etc then bump it up more.
+When users provide feedback or request changes:
+1. Carefully consider their specific requests
+2. Update only the relevant parts of the listing
+3. Keep other details consistent
+4. Provide natural-sounding updates that maintain the listing's professional tone
+
+Base all details on the provided images, property information, and user feedback.
+If the property is in San Francisco, assume $2000/month minimum per bedroom, adjusting up for amenities like laundry, modern designs, etc.
 """
 new_prompt= """
 Analyze the provided images of the property and generate a compelling rental ad that highlights its unique features and appeals to potential renters.
